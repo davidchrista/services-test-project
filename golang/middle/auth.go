@@ -1,4 +1,4 @@
-package mw
+package middle
 
 import (
 	"net/http"
