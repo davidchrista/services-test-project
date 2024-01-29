@@ -18,5 +18,5 @@ func main() {
 
 	router.GET("/", handlers.GetHello)
 
-	router.Run("localhost:4200")
+	router.Run("0.0.0.0:4200")
 }
