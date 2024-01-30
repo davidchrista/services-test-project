@@ -1,7 +1,11 @@
 version: "2"
-
 services:
   golang:
     build: golang
     ports:
-      - "4200:4200"
+      - "4200:4200"  
+  express:
+    build: express
+    init: true
+    ports:
+      - "4000:4000"
