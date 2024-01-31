@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/davidchrista/go-simple-web-service/handlers"
-	"github.com/davidchrista/go-simple-web-service/middle"
+	"github.com/davidchrista/services-test-project/goservice/handlers"
+	"github.com/davidchrista/services-test-project/goservice/middle"
 
 	"github.com/gin-gonic/gin"
 )

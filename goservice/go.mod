@@ -1,4 +1,4 @@
-module github.com/davidchrista/go-simple-web-service
+module github.com/davidchrista/services-test-project/goservice
 
 go 1.21.6
 
@@ -6,7 +6,7 @@ require (
 	github.com/auth0-community/go-auth0 v1.0.0
 	github.com/gin-contrib/cors v1.5.0
 	github.com/gin-gonic/gin v1.9.1
-	gopkg.in/square/go-jose.v2 v2.1.7
+	gopkg.in/square/go-jose.v2 v2.6.0
 )
 
 require (
