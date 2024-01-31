@@ -3,9 +3,13 @@ services:
   golang:
     build: golang
     ports:
-      - "4200:4200"  
+      - "4200:4200"
   express:
     build: express
     init: true
     ports:
       - "4000:4000"
+  react:
+    build: react
+    ports:
+      - "3000:3000"
