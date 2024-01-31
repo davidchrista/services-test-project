@@ -1,15 +1,15 @@
 version: "2"
 services:
-  golang:
-    build: golang
+  goservice:
+    build: goservice
     ports:
       - "4200:4200"
-  express:
-    build: express
+  nodeservice:
+    build: nodeservice
     init: true
     ports:
       - "4000:4000"
-  react:
-    build: react
+  reactfrontend:
+    build: reactfrontend
     ports:
       - "3000:3000"
