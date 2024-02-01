@@ -16,11 +16,9 @@ const topic = "testdata/1"
 const username = "david"
 const password = "Passw0rd"
 
-type MqttClient struct {
-	cli mqtt.Client
-}
+var cli mqtt.Client
 
-func (mqttCli *MqttClient) CreateMqttClient() {
+func InitClient() {
 	connectAddress := fmt.Sprintf("%s://%s:%d", protocol, broker, port)
 	rand.New(rand.NewSource(time.Now().UnixNano()))
 	clientID := fmt.Sprintf("go-client-%d", rand.Int())
@@ -33,16 +31,16 @@ func (mqttCli *MqttClient) CreateMqttClient() {
 	opts.SetClientID(clientID)
 	opts.SetKeepAlive(time.Second * 60)
 
-	mqttCli.cli = mqtt.NewClient(opts)
-	token := mqttCli.cli.Connect()
-	if token.WaitTimeout(3*time.Second) && token.Error() != nil {
+	cli = mqtt.NewClient(opts)
+	token := cli.Connect()
+	if token.WaitTimeout(time.Second*3) && token.Error() != nil {
 		log.Fatal(token.Error())
 	}
 }
 
-func (mqttCli MqttClient) Publish(payload string) {
+func Publish(payload string) {
 	qos := 0
-	if token := mqttCli.cli.Publish(topic, byte(qos), false, payload); token.Wait() && token.Error() != nil {
+	if token := cli.Publish(topic, byte(qos), false, payload); token.Wait() && token.Error() != nil {
 		fmt.Printf("publish failed, topic: %s, payload: %s\n", topic, payload)
 	} else {
 		fmt.Printf("publish success, topic: %s, payload: %s\n", topic, payload)

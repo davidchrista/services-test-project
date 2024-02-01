@@ -6,10 +6,9 @@ import (
 )
 
 func main() {
-	client := mqtt.MqttClient{}
-	client.CreateMqttClient()
+	mqtt.InitClient()
 	ch := data.Generate()
 	for {
-		client.Publish(<-ch)
+		mqtt.Publish(<-ch)
 	}
 }
