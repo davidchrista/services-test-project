@@ -12,5 +12,4 @@ ENV WORK /app
 RUN mkdir -p "$WORK"
 WORKDIR "$WORK"
 COPY --from=builder "$WORK"/dist/gomqtt "$WORK"
-EXPOSE 4200
 CMD ["sh", "-c", "${WORK}/gomqtt"]

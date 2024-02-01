@@ -37,6 +37,8 @@ const shutdown = (signal: string, value: number) => {
 };
 
 signals.forEach((val, signal) => {
-  process.on(signal, () => {console.log(`process received a ${signal} signal`);
-  shutdown(signal, val);})
+  process.on(signal, () => {
+    console.log(`process received a ${signal} signal`);
+    shutdown(signal, val);
+  });
 });
