@@ -17,3 +17,5 @@ services:
     build: gomqtt
   nodemqtt:
     build: nodemqtt
+  gocollector:
+    build: gocollector
