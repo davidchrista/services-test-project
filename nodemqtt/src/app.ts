@@ -57,6 +57,7 @@ const shutdown = (signal: string, value: number) => {
   console.log("shutdown!");
   cont = false;
   console.log(`stopped by ${signal} with value ${value}`);
+  process.exit(128 + value);
 };
 
 signals.forEach((val, signal) => {
