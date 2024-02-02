@@ -43,6 +43,6 @@ func Publish(payload string) {
 	if token := cli.Publish(topic, byte(qos), false, payload); token.Wait() && token.Error() != nil {
 		fmt.Printf("publish failed, topic: %s, payload: %s\n", topic, payload)
 	} else {
-		fmt.Printf("publish success, topic: %s, payload: %s\n", topic, payload)
+		//fmt.Printf("publish success, topic: %s, payload: %s\n", topic, payload)
 	}
 }

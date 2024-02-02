@@ -22,7 +22,7 @@ const publish = (payload: string) => {
     if (error) {
       console.error(error);
     } else {
-      console.log(`publish success, topic : ${topic}, payload: ${payload}`);
+      //console.log(`publish success, topic : ${topic}, payload: ${payload}`);
     }
   });
 };
