@@ -13,9 +13,9 @@ services:
     build: reactfrontend
     ports:
       - "3000:3000"
-  gomqtt:
-    build: gomqtt
-  nodemqtt:
-    build: nodemqtt
+  gomqttemitter:
+    build: gomqttemitter
+  nodemqttemitter:
+    build: nodemqttemitter
   gocollector:
     build: gocollector

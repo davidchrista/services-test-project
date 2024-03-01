@@ -1,5 +1,5 @@
 {
-  "name": "nodemqtt",
+  "name": "nodemqttemitter",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

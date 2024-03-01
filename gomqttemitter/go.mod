@@ -1,4 +1,4 @@
-module github.com/davidchrista/services-test-project/gomqtt
+module github.com/davidchrista/services-test-project/gomqttemitter
 
 go 1.21.6
 

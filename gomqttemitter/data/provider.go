@@ -23,7 +23,7 @@ func Generate() <-chan string {
 			change := (rand.Float32()*0.5 - 0.25) * delay / 5
 			val += change
 			time.Sleep(time.Second * time.Duration(delay))
-			var m = Message{ID: msgCount, Sender: "gomqtt", Message: fmt.Sprintf("Value: %f", val)}
+			var m = Message{ID: msgCount, Sender: "gomqttemitter", Message: fmt.Sprintf("Value: %f", val)}
 			j, err := json.Marshal(m)
 			if err == nil {
 				ch <- string(j[:])

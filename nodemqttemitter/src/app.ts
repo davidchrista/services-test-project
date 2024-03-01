@@ -42,7 +42,7 @@ let cont = true;
     publish(
       JSON.stringify({
         id: i,
-        sender: "nodemqtt",
+        sender: "nodemqttemitter",
         message: `Value: ${val}`,
       })
     );
