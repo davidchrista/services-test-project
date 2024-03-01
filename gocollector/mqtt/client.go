@@ -42,7 +42,7 @@ func Receive() <-chan string {
 	ch := make(chan string)
 	qos := 0
 	cli.Subscribe(topic, byte(qos), func(cli mqtt.Client, msg mqtt.Message) {
-		ch <- fmt.Sprintf("Received `%s` from `%s` topic", msg.Payload(), msg.Topic())
+		ch <- string(msg.Payload())
 	})
 	return ch
 }

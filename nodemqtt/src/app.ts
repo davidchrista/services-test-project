@@ -33,14 +33,17 @@ let cont = true;
 
 (async () => {
   let i = 0;
+  let val = Math.random() * 30;
   while (cont) {
     const delay = Math.random() * 5 * 1000;
+    const change = ((Math.random() * 0.5 - 0.25) * delay) / 5000;
+    val += change;
     await sleep(delay);
     publish(
       JSON.stringify({
         id: i,
         sender: "nodemqtt",
-        message: `Duration: ${delay / 1000}`,
+        message: `Value: ${val}`,
       })
     );
     i++;

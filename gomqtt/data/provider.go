@@ -17,10 +17,13 @@ func Generate() <-chan string {
 	ch := make(chan string)
 	go func() {
 		msgCount := 0
+		val := rand.Float32() * 30
 		for ; true; msgCount += 1 {
 			delay := rand.Float32() * 5
+			change := (rand.Float32()*0.5 - 0.25) * delay / 5
+			val += change
 			time.Sleep(time.Second * time.Duration(delay))
-			var m = Message{ID: msgCount, Sender: "gomqtt", Message: fmt.Sprintf("Duration: %f", delay)}
+			var m = Message{ID: msgCount, Sender: "gomqtt", Message: fmt.Sprintf("Value: %f", val)}
 			j, err := json.Marshal(m)
 			if err == nil {
 				ch <- string(j[:])
