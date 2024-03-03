@@ -25,7 +25,7 @@ const FetchButton = (data: FetchButtonData) => {
         }
       });
 
-      const text = await response.data;
+      const text = JSON.stringify(await response.data);
 
       data.cb(text);
     } catch (e: any) {

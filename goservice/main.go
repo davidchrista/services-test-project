@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/davidchrista/services-test-project/goservice/influx"
 	"github.com/davidchrista/services-test-project/goservice/handlers"
 	"github.com/davidchrista/services-test-project/goservice/middle"
 
@@ -8,15 +9,15 @@ import (
 )
 
 func main() {
+	influx.InitRetriever()
+
 	router := gin.Default()
 
 	router.Use(middle.CorsMiddleware()).Use(middle.AuthMiddleware())
 
-	router.GET("/albums/:id", handlers.GetAlbum)
-	router.GET("/albums", handlers.GetAlbums)
-	router.GET("/reduce/:id", handlers.PriceReduction)
-
-	router.GET("/", handlers.GetHello)
+	router.GET("/", handlers.GetValues)
 
 	router.Run("0.0.0.0:4200")
+
+	influx.TeardownRetriever()
 }

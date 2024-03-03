@@ -9,10 +9,10 @@ services:
     init: true
     ports:
       - "4000:4000"
-  reactfrontend:
-    build: reactfrontend
-    ports:
-      - "3000:3000"
+  # reactfrontend:
+  #   build: reactfrontend
+  #   ports:
+  #     - "3000:3000"
   gomqttemitter:
     build: gomqttemitter
   nodemqttemitter:
