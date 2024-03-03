@@ -2,10 +2,16 @@ import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import React from "react";
 
-interface FetchButtonData {
+export interface Data {
+  sender: string;
+  time: string;
+  value: number;
+}
+
+export interface FetchButtonData {
   host: string;
   port: string;
-  cb: (msg: string) => void
+  cb: (msg: Data[]) => void
 }
 
 const FetchButton = (data: FetchButtonData) => {
@@ -25,11 +31,11 @@ const FetchButton = (data: FetchButtonData) => {
         }
       });
 
-      const text = JSON.stringify(await response.data);
+      const text = await response.data;
 
       data.cb(text);
     } catch (e: any) {
-      data.cb(`Error: ${e.message}`);
+      data.cb([]);
     }
   };
 
