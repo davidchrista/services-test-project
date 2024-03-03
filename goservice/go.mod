@@ -4,6 +4,7 @@ go 1.21.6
 
 require (
 	github.com/InfluxCommunity/influxdb3-go v0.6.0
+	github.com/apache/arrow/go/v14 v14.0.2
 	github.com/auth0-community/go-auth0 v1.0.0
 	github.com/gin-contrib/cors v1.5.0
 	github.com/gin-gonic/gin v1.9.1
@@ -11,7 +12,6 @@ require (
 )
 
 require (
-	github.com/apache/arrow/go/v14 v14.0.2 // indirect
 	github.com/bytedance/sonic v1.10.1 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20230717121745-296ad89f973d // indirect
 	github.com/chenzhuoyu/iasm v0.9.0 // indirect

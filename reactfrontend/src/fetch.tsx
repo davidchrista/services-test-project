@@ -11,7 +11,8 @@ export interface Data {
 export interface FetchButtonData {
   host: string;
   port: string;
-  cb: (msg: Data[]) => void
+  path?: string;
+  cb: (msg: Data[]) => void;
 }
 
 const FetchButton = (data: FetchButtonData) => {
@@ -22,14 +23,17 @@ const FetchButton = (data: FetchButtonData) => {
       const address = `http://${data.host}:${data.port}`;
 
       const accessToken = await getAccessTokenSilently({
-        audience: 'http://localhost:4000'
-      });  
-      
-      const response = await axios.get(address, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`
-        }
+        audience: "http://localhost:4000",
       });
+
+      const response = await axios.get(
+        address + (data.path !== undefined ? "/" + data.path : ""),
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
 
       const text = await response.data;
 
@@ -39,7 +43,11 @@ const FetchButton = (data: FetchButtonData) => {
     }
   };
 
-  return <button onClick={doFetch}>Fetch {data.host}:{data.port}</button>;
+  return (
+    <button onClick={doFetch}>
+      Fetch {data.host}:{data.port}
+    </button>
+  );
 };
 
 export default FetchButton;

@@ -15,6 +15,7 @@ func main() {
 
 	router.Use(middle.CorsMiddleware()).Use(middle.AuthMiddleware())
 
+	router.GET("/:sender", handlers.GetValuesFromSender)
 	router.GET("/", handlers.GetValues)
 
 	router.Run("0.0.0.0:4200")

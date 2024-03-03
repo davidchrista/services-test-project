@@ -5,6 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "goservice",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/goservice"
+    },
+    {
       "type": "chrome",
       "request": "launch",
       "name": "reactfrontend",
