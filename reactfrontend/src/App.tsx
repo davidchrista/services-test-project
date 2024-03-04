@@ -25,6 +25,12 @@ function App() {
       />
       <FetchButton
         host="localhost"
+        port="4000"
+        path={senderInput !== "" ? senderInput : undefined}
+        cb={setFetchResult}
+      />
+      <FetchButton
+        host="localhost"
         port="4200"
         path={senderInput !== "" ? senderInput : undefined}
         cb={setFetchResult}
