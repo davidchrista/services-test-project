@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "typescript",
+      "tsconfig": "nodemqttemitter/tsconfig.json",
+      "problemMatcher": ["$tsc"],
+      "group": "build",
+      "label": "build nodemqttemitter"
+    },
+    {
+      "type": "typescript",
+      "tsconfig": "nodeservice/tsconfig.json",
+      "problemMatcher": ["$tsc"],
+      "group": "build",
+      "label": "build nodeservice"
+    }
+  ]
+}

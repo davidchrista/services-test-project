@@ -5,11 +5,43 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "gocollector",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/gocollector"
+    },
+    {
+      "name": "gomqttemitter",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/gomqttemitter"
+    },
+    {
       "name": "goservice",
       "type": "go",
       "request": "launch",
       "mode": "auto",
       "program": "${workspaceFolder}/goservice"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "nodemqttemitter",
+      "preLaunchTask": "build nodemqttemitter",
+      "program": "${workspaceFolder}/nodemqttemitter/src/app.ts",
+      "outFiles": ["${workspaceFolder}/nodemqttemitter/dist/**/*.js"],
+      "sourceMaps": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "nodeservice",
+      "preLaunchTask": "build nodeservice",
+      "program": "${workspaceFolder}/nodeservice/src/app.ts",
+      "outFiles": ["${workspaceFolder}/nodeservice/dist/**/*.js"],
+      "sourceMaps": true
     },
     {
       "type": "chrome",
