@@ -7,7 +7,7 @@ import (
 
 func main() {
 	mqtt.InitClient()
-	ch := data.Generate()
+	ch := data.Generate(-1, 5.0)
 	for {
 		mqtt.Publish(<-ch)
 	}

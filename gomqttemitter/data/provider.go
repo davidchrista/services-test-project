@@ -13,14 +13,17 @@ type Message struct {
 	Message string `json:"message"`
 }
 
-func Generate() <-chan string {
+func Generate(maxNb int, delayBase float32) <-chan string {
+	if delayBase <= 0.0 {
+		delayBase = 0.001
+	}
 	ch := make(chan string)
 	go func() {
 		msgCount := 0
 		val := rand.Float32() * 30
-		for ; true; msgCount += 1 {
-			delay := rand.Float32() * 5
-			change := (rand.Float32()*0.5 - 0.25) * delay / 5
+		for ; maxNb < 0 || msgCount < maxNb; msgCount += 1 {
+			delay := rand.Float32() * delayBase
+			change := (rand.Float32()*0.5 - 0.25) * delay / delayBase
 			val += change
 			time.Sleep(time.Second * time.Duration(delay))
 			var m = Message{ID: msgCount, Sender: "gomqttemitter", Message: fmt.Sprintf("Value: %f", val)}
@@ -29,6 +32,7 @@ func Generate() <-chan string {
 				ch <- string(j[:])
 			}
 		}
+		close(ch)
 	}()
 	return ch
 }
