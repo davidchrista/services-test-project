@@ -1,21 +1,21 @@
 version: "2"
 services:
+  gocollector:
+    build: gocollector
+  gomqttemitter:
+    build: gomqttemitter
   goservice:
     build: goservice
     ports:
       - "4200:4200"
+  nodemqttemitter:
+    build: nodemqttemitter
   nodeservice:
     build: nodeservice
     init: true
     ports:
       - "4000:4000"
-  # reactfrontend:
-  #   build: reactfrontend
-  #   ports:
-  #     - "3000:3000"
-  gomqttemitter:
-    build: gomqttemitter
-  nodemqttemitter:
-    build: nodemqttemitter
-  gocollector:
-    build: gocollector
+  reactfrontend:
+    build: reactfrontend
+    ports:
+      - "3000:3000"
