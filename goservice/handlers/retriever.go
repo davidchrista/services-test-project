@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/davidchrista/services-test-project/goservice/influx"
+	influx "github.com/davidchrista/go-influx-client"
 	"github.com/gin-gonic/gin"
 )
 

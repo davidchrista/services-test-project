@@ -3,15 +3,16 @@ module github.com/davidchrista/services-test-project/goservice
 go 1.21.6
 
 require (
-	github.com/InfluxCommunity/influxdb3-go v0.6.0
-	github.com/apache/arrow/go/v14 v14.0.2
 	github.com/auth0-community/go-auth0 v1.0.0
+	github.com/davidchrista/go-influx-client v0.1.0
 	github.com/gin-contrib/cors v1.5.0
 	github.com/gin-gonic/gin v1.9.1
 	gopkg.in/square/go-jose.v2 v2.6.0
 )
 
 require (
+	github.com/InfluxCommunity/influxdb3-go v0.6.0 // indirect
+	github.com/apache/arrow/go/v14 v14.0.2 // indirect
 	github.com/bytedance/sonic v1.10.1 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20230717121745-296ad89f973d // indirect
 	github.com/chenzhuoyu/iasm v0.9.0 // indirect

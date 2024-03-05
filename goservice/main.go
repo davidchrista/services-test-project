@@ -3,8 +3,8 @@ package main
 import (
 	"os"
 
+	influx "github.com/davidchrista/go-influx-client"
 	"github.com/davidchrista/services-test-project/goservice/handlers"
-	"github.com/davidchrista/services-test-project/goservice/influx"
 	"github.com/davidchrista/services-test-project/goservice/middle"
 
 	"github.com/gin-gonic/gin"

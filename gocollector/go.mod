@@ -3,11 +3,12 @@ module github.com/davidchrista/services-test-project/gocollector
 go 1.21.6
 
 require (
-	github.com/InfluxCommunity/influxdb3-go v0.6.0
+	github.com/davidchrista/go-influx-client v0.1.0
 	github.com/davidchrista/go-mqtt-client v0.1.3
 )
 
 require (
+	github.com/InfluxCommunity/influxdb3-go v0.6.0 // indirect
 	github.com/apache/arrow/go/v14 v14.0.2 // indirect
 	github.com/eclipse/paho.mqtt.golang v1.4.3 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect

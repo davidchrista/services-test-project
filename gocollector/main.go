@@ -6,9 +6,9 @@ import (
 	"os/signal"
 	"syscall"
 
+	influx "github.com/davidchrista/go-influx-client"
 	mqtt "github.com/davidchrista/go-mqtt-client"
 	"github.com/davidchrista/services-test-project/gocollector/controller"
-	"github.com/davidchrista/services-test-project/gocollector/influx"
 )
 
 func main() {

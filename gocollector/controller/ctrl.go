@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/davidchrista/services-test-project/gocollector/influx"
+	influx "github.com/davidchrista/go-influx-client"
 	mqtt "github.com/davidchrista/go-mqtt-client"
 )
 
