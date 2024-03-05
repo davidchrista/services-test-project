@@ -5,7 +5,7 @@ const broker = "v090e996.ala.us-east-1.emqxsl.com";
 const port = 8883;
 const topic = "testdata/1";
 const username = "david";
-const password = "Passw0rd";
+const password: string | undefined = process.env.MQTT_PASSWORD;
 
 const clientId = `node-client-${Math.random().toString(16).substring(2, 8)}`;
 

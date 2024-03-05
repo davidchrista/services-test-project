@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
+	"os"
 	"time"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
@@ -14,11 +15,13 @@ const broker = "v090e996.ala.us-east-1.emqxsl.com"
 const port = 8883
 const topic = "testdata/1"
 const username = "david"
-const password = "Passw0rd"
+var password string
 
 var cli mqtt.Client
 
 func InitClient() {
+	password = os.Getenv("MQTT_PASSWORD")
+
 	connectAddress := fmt.Sprintf("%s://%s:%d", protocol, broker, port)
 	rand.New(rand.NewSource(time.Now().UnixNano()))
 	clientID := fmt.Sprintf("go-client-%d", rand.Int())

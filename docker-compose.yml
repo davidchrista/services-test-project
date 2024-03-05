@@ -2,19 +2,30 @@ version: "2"
 services:
   gocollector:
     build: gocollector
+    environment:
+      - INFLUXDB_TOKEN
+      - MQTT_PASSWORD
   gomqttemitter:
     build: gomqttemitter
+    environment:
+      - MQTT_PASSWORD
   goservice:
     build: goservice
     ports:
       - "4200:4200"
+    environment:
+      - INFLUXDB_TOKEN
   nodemqttemitter:
     build: nodemqttemitter
+    environment:
+      - MQTT_PASSWORD
   nodeservice:
     build: nodeservice
     init: true
     ports:
       - "4000:4000"
+    environment:
+      - INFLUXDB_TOKEN
   reactfrontend:
     build: reactfrontend
     ports:

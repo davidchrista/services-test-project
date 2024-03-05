@@ -1,8 +1,7 @@
 import { InfluxDBClient, Point } from "@influxdata/influxdb3-client";
 
 const url = "https://eu-central-1-1.aws.cloud2.influxdata.com";
-const token =
-  "I28tHKf4SQWeinRwndWkv0TsP_tEXbVS9RR2eYxo4sgFTWGesRSOidKKjBl24gL1ShQLN43z9S665hoGopBbjA==";
+const token: string | undefined = process.env.INFLUXDB_TOKEN;;
 const database = "services-test-project";
 
 let cli: InfluxDBClient | null = null;
