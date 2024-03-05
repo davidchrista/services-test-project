@@ -6,14 +6,14 @@ import (
 	"os/signal"
 	"syscall"
 
+	mqtt "github.com/davidchrista/go-mqtt-client"
 	"github.com/davidchrista/services-test-project/gocollector/controller"
 	"github.com/davidchrista/services-test-project/gocollector/influx"
-	mqtt "github.com/davidchrista/go-mqtt-client"
 )
 
 func main() {
 	onExit(func() {
-		influx.TeardownPublisher()
+		influx.TeardownClient()
 		os.Exit(1)
 	})
 
@@ -24,7 +24,10 @@ func main() {
 		Topic:    "testdata/1",
 		Username: "david",
 		Password: os.Getenv("MQTT_PASSWORD")})
-	influx.InitPublisher()
+	influx.InitClient(influx.Config{
+		Url:      "https://eu-central-1-1.aws.cloud2.influxdata.com",
+		Token:    os.Getenv("INFLUXDB_TOKEN"),
+		Database: "services-test-project"})
 
 	controller.Collect()
 }

@@ -3,41 +3,51 @@ package influx
 import (
 	"context"
 	"fmt"
-	"os"
 	"time"
 
 	"github.com/InfluxCommunity/influxdb3-go/influxdb3"
 	"github.com/apache/arrow/go/v14/arrow"
 )
 
-const url = "https://eu-central-1-1.aws.cloud2.influxdata.com"
-var token string
-const database = "services-test-project"
+type Config struct {
+	Url string
+	Token string
+	Database string
+}
 
 var cli *influxdb3.Client
-var options influxdb3.QueryOptions
+var qo influxdb3.QueryOptions
+var wo influxdb3.WriteOptions
 
-func InitRetriever() {
-	token = os.Getenv("INFLUXDB_TOKEN")
-
+func InitClient(c Config) {
 	var err error
 	cli, err = influxdb3.New(influxdb3.ClientConfig{
-		Host:  url,
-		Token: token,
+		Host:  c.Url,
+		Token: c.Token,
 	})
 
 	if err != nil {
 		panic(err)
 	}
 
-	options = influxdb3.QueryOptions{
-		Database: database,
+	qo = influxdb3.QueryOptions{
+		Database: c.Database,
+	}
+	wo = influxdb3.WriteOptions{
+		Database: c.Database,
 	}
 }
 
-func TeardownRetriever() {
+func TeardownClient() {
 	err := cli.Close()
 	if err != nil {
+		panic(err)
+	}
+}
+
+func Publish(sender string, val float32) {
+	point := influxdb3.NewPointWithMeasurement("measurement").SetTag("sender", sender).SetField("value", val)
+	if err := cli.WritePointsWithOptions(context.Background(), &wo, point); err != nil {
 		panic(err)
 	}
 }
@@ -64,7 +74,7 @@ type Entry struct {
 }
 
 func Retrieve(senders []string) []Entry {
-	iterator, err := cli.QueryWithOptions(context.Background(), &options, query(senders))
+	iterator, err := cli.QueryWithOptions(context.Background(), &qo, query(senders))
 	if err != nil {
 		panic(err)
 	}

@@ -1,15 +1,20 @@
 package main
 
 import (
-	"github.com/davidchrista/services-test-project/goservice/influx"
+	"os"
+
 	"github.com/davidchrista/services-test-project/goservice/handlers"
+	"github.com/davidchrista/services-test-project/goservice/influx"
 	"github.com/davidchrista/services-test-project/goservice/middle"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	influx.InitRetriever()
+	influx.InitClient(influx.Config{
+		Url:      "https://eu-central-1-1.aws.cloud2.influxdata.com",
+		Token:    os.Getenv("INFLUXDB_TOKEN"),
+		Database: "services-test-project"})
 
 	router := gin.Default()
 
@@ -20,5 +25,5 @@ func main() {
 
 	router.Run("0.0.0.0:4200")
 
-	influx.TeardownRetriever()
+	influx.TeardownClient()
 }
