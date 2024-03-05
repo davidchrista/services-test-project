@@ -31,22 +31,33 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 let cont = true;
 
-(async () => {
+export async function* generate(
+  maxNb: number,
+  delayBase: number
+): AsyncGenerator<string> {
+  if (delayBase <= 0.0) {
+    delayBase = 0.001
+  }
   let i = 0;
   let val = Math.random() * 30;
-  while (cont) {
-    const delay = Math.random() * 5 * 1000;
-    const change = ((Math.random() * 0.5 - 0.25) * delay) / 5000;
+  while (cont && (maxNb < 0 || i < maxNb)) {
+    const delay = Math.random() * delayBase * 1000;
+    const change = ((Math.random() * 0.5 - 0.25) * delay) / delayBase / 1000;
     val += change;
     await sleep(delay);
-    publish(
-      JSON.stringify({
-        id: i,
-        sender: "nodemqttemitter",
-        message: `Value: ${val}`,
-      })
-    );
+    yield JSON.stringify({
+      id: i,
+      sender: "nodemqttemitter",
+      message: `Value: ${val}`,
+    });
     i++;
+  }
+  return;
+}
+
+(async () => {
+  for await (const s of generate(-1, 5.0)) {
+    publish(s);
   }
 })();
 
