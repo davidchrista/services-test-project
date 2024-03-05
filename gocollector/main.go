@@ -8,7 +8,7 @@ import (
 
 	"github.com/davidchrista/services-test-project/gocollector/controller"
 	"github.com/davidchrista/services-test-project/gocollector/influx"
-	"github.com/davidchrista/services-test-project/gocollector/mqtt"
+	mqtt "github.com/davidchrista/go-mqtt-client"
 )
 
 func main() {
@@ -17,7 +17,13 @@ func main() {
 		os.Exit(1)
 	})
 
-	mqtt.InitClient()
+	mqtt.InitClient(mqtt.Config{
+		Protocol: "ssl",
+		Broker:   "v090e996.ala.us-east-1.emqxsl.com",
+		Port:     8883,
+		Topic:    "testdata/1",
+		Username: "david",
+		Password: os.Getenv("MQTT_PASSWORD")})
 	influx.InitPublisher()
 
 	controller.Collect()

@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/davidchrista/services-test-project/gocollector/influx"
-	"github.com/davidchrista/services-test-project/gocollector/mqtt"
+	mqtt "github.com/davidchrista/go-mqtt-client"
 )
 
 type Data struct {

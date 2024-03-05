@@ -4,11 +4,12 @@ go 1.21.6
 
 require (
 	github.com/InfluxCommunity/influxdb3-go v0.6.0
-	github.com/eclipse/paho.mqtt.golang v1.4.3
+	github.com/davidchrista/go-mqtt-client v0.1.3
 )
 
 require (
 	github.com/apache/arrow/go/v14 v14.0.2 // indirect
+	github.com/eclipse/paho.mqtt.golang v1.4.3 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/flatbuffers v23.5.26+incompatible // indirect
