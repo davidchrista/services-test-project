@@ -44,7 +44,7 @@ const FetchButton = (data: FetchButtonData) => {
   };
 
   return (
-    <button onClick={doFetch}>
+    <button data-testid="test-fetch-button" onClick={doFetch}>
       Fetch {data.host}:{data.port}
     </button>
   );

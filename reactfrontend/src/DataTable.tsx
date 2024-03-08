@@ -8,7 +8,7 @@ interface DataTableData {
 
 const DataTable = ({ data }: DataTableData) => {
   return (
-    <table className="custom-table" width={1000}>
+    <table data-testid="test-data-table" className="custom-table" width={1000}>
       <thead>
         <tr>
           <th>Sender</th>
@@ -18,7 +18,7 @@ const DataTable = ({ data }: DataTableData) => {
       </thead>
       <tbody>
         {data.map((item, index) => (
-          <tr key={index}>
+          <tr data-testid="test-table-row" key={index}>
             <td>{item.sender}</td>
             <td>{item.time}</td>
             <td>{item.value}</td>

@@ -16,6 +16,7 @@ function App() {
       <LogoutButton />
       <Profile />
       <input
+        data-testid="test-sender-input"
         type="text"
         value={senderInput}
         onChange={(event) => {
