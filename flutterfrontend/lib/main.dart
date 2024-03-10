@@ -152,10 +152,10 @@ class _MyAppState extends State<_MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Auth0 Demo',
+      title: 'Services Test',
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Auth0 Demo'),
+          title: const Text('Services Test'),
         ),
         body: Center(
           child: isBusy
