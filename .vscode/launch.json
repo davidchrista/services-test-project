@@ -5,6 +5,12 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "flutterfrontend",
+      "type": "dart",
+      "request": "launch",
+      "program": "${workspaceFolder}/flutterfrontend/lib/main.dart"
+    },
+    {
       "name": "gocollector",
       "type": "go",
       "request": "launch",
@@ -56,6 +62,7 @@
         "--remote-debugging-port=9222",
         "--disable-background-networking"
       ]
-    }
+    },
+    
   ]
 }
