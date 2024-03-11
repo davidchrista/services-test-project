@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http"
 	"os"
 
 	influx "github.com/davidchrista/go-influx-client"
@@ -20,6 +21,9 @@ func main() {
 
 	router.Use(middle.CorsMiddleware()).Use(middle.AuthMiddleware())
 
+	router.GET("/test", func(ctx *gin.Context) {
+		ctx.String(http.StatusOK, "OK!")
+	})
 	router.GET("/:sender", handlers.GetValuesFromSender)
 	router.GET("/", handlers.GetValues)
 
