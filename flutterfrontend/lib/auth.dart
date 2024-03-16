@@ -67,12 +67,12 @@ class _WithAuthState extends State<WithAuth> {
     return _credentials != null
         ? widget.createMain(
             logoutAction, _credentials?.user, _credentials?.accessToken)
-        : isBusy
-            ? const CircularProgressIndicator()
-            : Login(loginAction, errorMessage);
+        : Center(
+            child: isBusy
+                ? const CircularProgressIndicator()
+                : Login(loginAction, errorMessage));
   }
 }
-
 
 class Login extends StatelessWidget {
   final Future<void> Function() loginAction;
@@ -84,7 +84,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         ElevatedButton(
           onPressed: () async {

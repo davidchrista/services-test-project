@@ -46,55 +46,57 @@ class _DataFetchingWidgetState extends State<DataFetchingWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextField(
-            decoration: const InputDecoration(
-              labelText: 'Enter URL',
-              border: OutlineInputBorder(),
+    return Expanded(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              decoration: const InputDecoration(
+                labelText: 'Enter URL',
+                border: OutlineInputBorder(),
+              ),
+              onChanged: (value) {
+                setState(() {
+                  _url = value;
+                });
+              },
+              controller: TextEditingController(text: _url),
             ),
-            onChanged: (value) {
-              setState(() {
-                _url = value;
-              });
-            },
-            controller: TextEditingController(text: _url),
           ),
-        ),
-        const SizedBox(height: 6),
-        ElevatedButton(
-          onPressed: () {
-            if (_url != null && _url!.isNotEmpty) {
-              _fetchData(30);
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Please enter a valid URL')),
-              );
-            }
-          },
-          child: const Text('Fetch'),
-        ),
-        const SizedBox(height: 6),
-        _data != null
-            ? SizedBox(
-                height: 400,
+          const SizedBox(height: 6),
+          ElevatedButton(
+            onPressed: () {
+              if (_url != null && _url!.isNotEmpty) {
+                _fetchData(30);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Please enter a valid URL')),
+                );
+              }
+            },
+            child: const Text('Fetch'),
+          ),
+          const SizedBox(height: 6),
+          _data != null
+              ? Expanded(
                 child: ListView.builder(
-                itemCount: _data!.length,
-                itemBuilder: (context, index) {
-                  final item = _data![index];
-                  return ListTile(
-                    title: Text(item.sender),
-                    subtitle: Text(item.time),
-                    trailing: Text(item.value.toString()),
-                  );
-                },
-              ))
-            : Container(),
-      ],
+                    shrinkWrap: true,
+                    itemCount: _data!.length,
+                    itemBuilder: (context, index) {
+                      final item = _data![index];
+                      return ListTile(
+                        title: Text(item.sender),
+                        subtitle: Text(item.time),
+                        trailing: Text(item.value.toString()),
+                      );
+                    },
+                  ),
+              )
+              : Container(),
+        ],
+      ),
     );
   }
 
