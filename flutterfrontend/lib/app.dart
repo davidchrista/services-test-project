@@ -14,11 +14,9 @@ class App extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Services Test'),
         ),
-        body: Center(
-          child: Auth((Future<void> Function() logoutAction, UserProfile? user,
-                  String? accessToken) =>
-              MainWidget(logoutAction, user, accessToken)),
-        ),
+        body: WithAuth((Future<void> Function() logoutAction, UserProfile? user,
+                String? accessToken) =>
+            MainWidget(logoutAction, user, accessToken)),
       ),
     );
   }

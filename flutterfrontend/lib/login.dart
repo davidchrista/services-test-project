@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 
 const appScheme = 'flutterfrontend';
 
-class Auth extends StatefulWidget {
+class WithAuth extends StatefulWidget {
   final Widget Function(Future<void> Function(), UserProfile?, String?)
       createMain;
 
-  const Auth(this.createMain, {super.key});
+  const WithAuth(this.createMain, {super.key});
 
   @override
-  State<Auth> createState() => _AuthState();
+  State<WithAuth> createState() => _WithAuthState();
 }
 
-class _AuthState extends State<Auth> {
+class _WithAuthState extends State<WithAuth> {
   bool isBusy = false;
   late String errorMessage;
 
