@@ -5,8 +5,9 @@ import 'package:http/http.dart' as http;
 
 class DataFetchingWidget extends StatefulWidget {
   final String? token;
+  final void Function(bool) setDrawProfile;
 
-  const DataFetchingWidget(this.token, {super.key});
+  const DataFetchingWidget(this.token, this.setDrawProfile, {super.key});
 
   @override
   State<DataFetchingWidget> createState() => _DataFetchingWidgetState();
@@ -64,6 +65,7 @@ class _DataFetchingWidgetState extends State<DataFetchingWidget> {
             controller: TextEditingController(text: _url),
           ),
         ),
+        const SizedBox(height: 6),
         ElevatedButton(
           onPressed: () {
             if (_url != null && _url!.isNotEmpty) {
@@ -76,10 +78,10 @@ class _DataFetchingWidgetState extends State<DataFetchingWidget> {
           },
           child: const Text('Fetch'),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 6),
         _data != null
             ? SizedBox(
-                height: 200,
+                height: 400,
                 child: ListView.builder(
                 itemCount: _data!.length,
                 itemBuilder: (context, index) {
@@ -97,6 +99,7 @@ class _DataFetchingWidgetState extends State<DataFetchingWidget> {
   }
 
   void _fetchData(int num) async {
+    widget.setDrawProfile(false);
     try {
       http.Response response = await http.get(
         Uri.parse(_url!),
