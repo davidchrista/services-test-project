@@ -13,15 +13,15 @@ class DataFetchingWidget extends StatefulWidget {
   State<DataFetchingWidget> createState() => _DataFetchingWidgetState();
 }
 
-class Entry {
+class _Entry {
   final String sender;
   final String time;
   final double value;
 
-  Entry({required this.sender, required this.time, required this.value});
+  _Entry({required this.sender, required this.time, required this.value});
 
-  factory Entry.fromJson(Map<String, dynamic> json) {
-    return Entry(
+  factory _Entry.fromJson(Map<String, dynamic> json) {
+    return _Entry(
       sender: json['sender'],
       time: json['time'],
       value: json['value'],
@@ -31,7 +31,7 @@ class Entry {
 
 class _DataFetchingWidgetState extends State<DataFetchingWidget> {
   String? _url;
-  List<Entry>? _data;
+  List<_Entry>? _data;
 
   @override
   void initState() {
@@ -39,9 +39,9 @@ class _DataFetchingWidgetState extends State<DataFetchingWidget> {
     _url = 'http://192.168.178.29:4200/';
   }
 
-  List<Entry> parseJson(String jsonStr) {
+  List<_Entry> parseJson(String jsonStr) {
     final parsed = json.decode(jsonStr).cast<Map<String, dynamic>>();
-    return parsed.map<Entry>((json) => Entry.fromJson(json)).toList();
+    return parsed.map<_Entry>((json) => _Entry.fromJson(json)).toList();
   }
 
   @override
