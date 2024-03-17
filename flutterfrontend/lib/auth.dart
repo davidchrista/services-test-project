@@ -13,12 +13,20 @@ class WithAuth extends StatefulWidget {
   State<WithAuth> createState() => _WithAuthState();
 }
 
+class AuthInfo {
+  final Future<void> Function() logoutAction;
+  final UserProfile user;
+  final String accessToken;
+  const AuthInfo(this.logoutAction, this.user, this.accessToken);
+}
+
 class _WithAuthState extends State<WithAuth> {
   bool isBusy = false;
   late String errorMessage;
 
-  Credentials? _credentials;
   late Auth0 auth0;
+
+  AuthInfo? _authInfo;
 
   @override
   void initState() {
@@ -42,7 +50,8 @@ class _WithAuthState extends State<WithAuth> {
 
       setState(() {
         isBusy = false;
-        _credentials = credentials;
+        _authInfo =
+            AuthInfo(logoutAction, credentials.user, credentials.accessToken);
       });
     } on Exception catch (e, s) {
       debugPrint('login error: $e - stack: $s');
@@ -58,15 +67,15 @@ class _WithAuthState extends State<WithAuth> {
     await auth0.webAuthentication(scheme: appScheme).logout();
 
     setState(() {
-      _credentials = null;
+      _authInfo = null;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return _credentials != null
+    return _authInfo != null
         ? widget.createMain(
-            logoutAction, _credentials?.user, _credentials?.accessToken)
+            logoutAction, _authInfo!.user, _authInfo!.accessToken)
         : Center(
             child: isBusy
                 ? const CircularProgressIndicator()
