@@ -44,19 +44,24 @@ class _MainWidgetState extends State<MainWidget> {
               )
             : Container(),
         _drawProfile ? const SizedBox(height: 6) : Container(),
-        Text('Name: ${global.authInfo?.user.name}'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Name: ${global.authInfo?.user.name}'),
+            const SizedBox(width: 6),
+            ElevatedButton(
+              onPressed: () async {
+                await global.authInfo?.logout();
+              },
+              child: const Text('Logout'),
+            ),
+          ],
+        ),
         _drawProfile ? const SizedBox(height: 6) : Container(),
         _drawProfile
             ? Text(
                 'Token: ${global.authInfo?.accessToken != null ? '${global.authInfo!.accessToken.substring(0, 100)} ...' : ''}')
             : Container(),
-        const SizedBox(height: 6),
-        ElevatedButton(
-          onPressed: () async {
-            await global.authInfo?.logout();
-          },
-          child: const Text('Logout'),
-        ),
         const SizedBox(height: 6),
         DataFetchingWidget(global.authInfo?.accessToken, _setDrawProfile),
       ],

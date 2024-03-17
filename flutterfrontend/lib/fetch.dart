@@ -51,32 +51,38 @@ class _DataFetchingWidgetState extends State<DataFetchingWidget> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              decoration: const InputDecoration(
-                labelText: 'Enter URL',
-                border: OutlineInputBorder(),
-              ),
-              onChanged: (value) {
-                setState(() {
-                  _url = value;
-                });
-              },
-              controller: TextEditingController(text: _url),
+            padding: const EdgeInsets.all(6.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    decoration: const InputDecoration(
+                      labelText: 'Enter URL',
+                      border: OutlineInputBorder(),
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        _url = value;
+                      });
+                    },
+                    controller: TextEditingController(text: _url),
+                  ),
+                ),
+                const SizedBox(width: 6),
+                ElevatedButton(
+                  onPressed: () {
+                    if (_url != null && _url!.isNotEmpty) {
+                      _fetchData(30);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Please enter a valid URL')),
+                      );
+                    }
+                  },
+                  child: const Text('Fetch'),
+                ),
+              ],
             ),
-          ),
-          const SizedBox(height: 6),
-          ElevatedButton(
-            onPressed: () {
-              if (_url != null && _url!.isNotEmpty) {
-                _fetchData(30);
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Please enter a valid URL')),
-                );
-              }
-            },
-            child: const Text('Fetch'),
           ),
           const SizedBox(height: 6),
           _data != null
