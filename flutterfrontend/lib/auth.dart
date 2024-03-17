@@ -1,5 +1,7 @@
 import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterfrontend/global.dart';
+import 'package:provider/provider.dart';
 
 const appScheme = 'flutterfrontend';
 
@@ -13,45 +15,39 @@ class WithAuth extends StatefulWidget {
   State<WithAuth> createState() => _WithAuthState();
 }
 
-class AuthInfo {
-  final Future<void> Function() logoutAction;
+class Auth {
+  final Future<void> Function() logout;
   final UserProfile user;
   final String accessToken;
-  const AuthInfo(this.logoutAction, this.user, this.accessToken);
+  const Auth(this.logout, this.user, this.accessToken);
 }
 
 class _WithAuthState extends State<WithAuth> {
   bool isBusy = false;
-  late String errorMessage;
+  String errorMessage = '';
 
-  late Auth0 auth0;
-
-  AuthInfo? _authInfo;
-
-  @override
-  void initState() {
-    super.initState();
-
-    auth0 =
-        Auth0('dev-gzm0pgbh.us.auth0.com', 'Lc5xWjq3AmxXL4Nyhp9QWspQF2psuEUm');
-    errorMessage = '';
-  }
-
-  Future<void> loginAction() async {
+  Future<void> login(Global global) async {
     setState(() {
       isBusy = true;
       errorMessage = '';
     });
 
     try {
-      final Credentials credentials = await auth0
+      final Credentials credentials = await global.auth0
           .webAuthentication(scheme: appScheme)
           .login(audience: 'http://localhost:4000');
 
+      Future<void> logout() async {
+        await global.auth0.webAuthentication(scheme: appScheme).logout();
+        global.clearAuth();
+      }
+
+      ;
+
+      global.setAuth(Auth(logout, credentials.user, credentials.accessToken));
+
       setState(() {
         isBusy = false;
-        _authInfo =
-            AuthInfo(logoutAction, credentials.user, credentials.accessToken);
       });
     } on Exception catch (e, s) {
       debugPrint('login error: $e - stack: $s');
@@ -63,46 +59,27 @@ class _WithAuthState extends State<WithAuth> {
     }
   }
 
-  Future<void> logoutAction() async {
-    await auth0.webAuthentication(scheme: appScheme).logout();
-
-    setState(() {
-      _authInfo = null;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return _authInfo != null
-        ? widget.createMain(
-            logoutAction, _authInfo!.user, _authInfo!.accessToken)
+    var global = context.watch<Global>();
+
+    return global.authInfo != null
+        ? widget.createMain(global.authInfo!.logout, global.authInfo!.user,
+            global.authInfo!.accessToken)
         : Center(
             child: isBusy
                 ? const CircularProgressIndicator()
-                : Login(loginAction, errorMessage));
-  }
-}
-
-class Login extends StatelessWidget {
-  final Future<void> Function() loginAction;
-  final String loginError;
-
-  const Login(this.loginAction, this.loginError, {final Key? key})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        ElevatedButton(
-          onPressed: () async {
-            await loginAction();
-          },
-          child: const Text('Login'),
-        ),
-        Text(loginError),
-      ],
-    );
+                : Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      ElevatedButton(
+                        onPressed: () async {
+                          await login(global);
+                        },
+                        child: const Text('Login'),
+                      ),
+                      Text(errorMessage),
+                    ],
+                  ));
   }
 }

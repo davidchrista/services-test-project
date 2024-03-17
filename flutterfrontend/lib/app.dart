@@ -1,10 +1,9 @@
 import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfrontend/auth.dart';
+import 'package:flutterfrontend/global.dart';
 import 'package:flutterfrontend/mainwidget.dart';
 import 'package:provider/provider.dart';
-
-import 'global.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
