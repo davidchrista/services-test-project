@@ -1,4 +1,3 @@
-import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfrontend/auth.dart';
 import 'package:flutterfrontend/global.dart';
@@ -18,9 +17,7 @@ class App extends StatelessWidget {
           appBar: AppBar(
             title: const Text('Services Test'),
           ),
-          body: WithAuth((Future<void> Function() logoutAction, UserProfile? user,
-                  String? accessToken) =>
-              MainWidget(logoutAction, user, accessToken)),
+          body: const WithAuth(child: MainWidget()),
         ),
       ),
     );

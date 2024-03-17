@@ -6,10 +6,9 @@ import 'package:provider/provider.dart';
 const appScheme = 'flutterfrontend';
 
 class WithAuth extends StatefulWidget {
-  final Widget Function(Future<void> Function(), UserProfile?, String?)
-      createMain;
+  final Widget child;
 
-  const WithAuth(this.createMain, {super.key});
+  const WithAuth({required this.child, super.key});
 
   @override
   State<WithAuth> createState() => _WithAuthState();
@@ -42,8 +41,6 @@ class _WithAuthState extends State<WithAuth> {
         global.clearAuth();
       }
 
-      ;
-
       global.setAuth(Auth(logout, credentials.user, credentials.accessToken));
 
       setState(() {
@@ -64,8 +61,7 @@ class _WithAuthState extends State<WithAuth> {
     var global = context.watch<Global>();
 
     return global.authInfo != null
-        ? widget.createMain(global.authInfo!.logout, global.authInfo!.user,
-            global.authInfo!.accessToken)
+        ? widget.child
         : Center(
             child: isBusy
                 ? const CircularProgressIndicator()

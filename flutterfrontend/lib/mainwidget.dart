@@ -1,17 +1,12 @@
 import 'dart:io';
 
-import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfrontend/fetch.dart';
+import 'package:flutterfrontend/global.dart';
+import 'package:provider/provider.dart';
 
 class MainWidget extends StatefulWidget {
-  final Future<void> Function() logoutAction;
-  final UserProfile? user;
-  final String? accessToken;
-
-  const MainWidget(this.logoutAction, this.user, this.accessToken,
-      {final Key? key})
-      : super(key: key);
+  const MainWidget({super.key});
 
   @override
   State<MainWidget> createState() => _MainWidgetState();
@@ -28,7 +23,8 @@ class _MainWidgetState extends State<MainWidget> {
 
   @override
   Widget build(BuildContext context) {
-    stdout.writeln(widget.accessToken ?? '');
+    var global = context.watch<Global>();
+    stdout.writeln(global.authInfo?.accessToken ?? '');
     return Column(
       mainAxisSize: _drawProfile ? MainAxisSize.min : MainAxisSize.max,
       children: <Widget>[
@@ -42,27 +38,27 @@ class _MainWidgetState extends State<MainWidget> {
                   image: DecorationImage(
                     fit: BoxFit.fill,
                     image: NetworkImage(
-                        widget.user?.pictureUrl.toString() ?? ''),
+                        global.authInfo?.user.pictureUrl.toString() ?? ''),
                   ),
                 ),
               )
             : Container(),
         _drawProfile ? const SizedBox(height: 6) : Container(),
-        Text('Name: ${widget.user?.name}'),
+        Text('Name: ${global.authInfo?.user.name}'),
         _drawProfile ? const SizedBox(height: 6) : Container(),
         _drawProfile
             ? Text(
-                'Token: ${widget.accessToken != null ? '${widget.accessToken!.substring(0, 100)} ...' : ''}')
+                'Token: ${global.authInfo?.accessToken != null ? '${global.authInfo!.accessToken.substring(0, 100)} ...' : ''}')
             : Container(),
         const SizedBox(height: 6),
         ElevatedButton(
           onPressed: () async {
-            await widget.logoutAction();
+            await global.authInfo?.logout();
           },
           child: const Text('Logout'),
         ),
         const SizedBox(height: 6),
-        DataFetchingWidget(widget.accessToken, _setDrawProfile),
+        DataFetchingWidget(global.authInfo?.accessToken, _setDrawProfile),
       ],
     );
   }
