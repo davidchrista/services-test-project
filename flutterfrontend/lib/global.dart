@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutterfrontend/auth.dart';
 
 class Global extends ChangeNotifier {
-  var auth0 = Auth0('dev-gzm0pgbh.us.auth0.com', 'Lc5xWjq3AmxXL4Nyhp9QWspQF2psuEUm');
+  var auth0 =
+      Auth0('dev-gzm0pgbh.us.auth0.com', 'Lc5xWjq3AmxXL4Nyhp9QWspQF2psuEUm');
   Auth? authInfo;
 
   void setAuth(Auth ai) {

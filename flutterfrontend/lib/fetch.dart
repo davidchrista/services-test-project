@@ -81,7 +81,7 @@ class _DataFetchingWidgetState extends State<DataFetchingWidget> {
           const SizedBox(height: 6),
           _data != null
               ? Expanded(
-                child: ListView.builder(
+                  child: ListView.builder(
                     shrinkWrap: true,
                     itemCount: _data!.length,
                     itemBuilder: (context, index) {
@@ -93,7 +93,7 @@ class _DataFetchingWidgetState extends State<DataFetchingWidget> {
                       );
                     },
                   ),
-              )
+                )
               : Container(),
         ],
       ),
