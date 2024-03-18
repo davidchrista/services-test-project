@@ -28,7 +28,7 @@ class _MainWidgetState extends State<MainWidget> {
     return Column(
       mainAxisSize: _drawProfile ? MainAxisSize.min : MainAxisSize.max,
       children: <Widget>[
-        _drawProfile
+        _drawProfile && global.authInfo?.user.pictureUrl != null
             ? Container(
                 width: 150,
                 height: 150,
