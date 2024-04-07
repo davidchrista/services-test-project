@@ -30,3 +30,7 @@ services:
     build: reactfrontend
     ports:
       - "3000:3000"
+  vuefrontend:
+    build: vuefrontend
+    ports:
+      - "3200:3000"
